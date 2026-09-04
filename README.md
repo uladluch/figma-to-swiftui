@@ -40,6 +40,7 @@ translating.
 | **design-tokens** | both | which colours iOS owns and must never be copied as values |
 | **figma-to-swiftui** | design → code | chrome is modifiers, not children; what not to build at all |
 | **swiftui-to-figma** | code → design | the Plugin API writes that look successful and did nothing |
+| **layer-naming** | design → code | the fixed role vocabulary an agent can actually match on |
 
 ---
 
