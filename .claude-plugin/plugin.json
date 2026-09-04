@@ -1,0 +1,11 @@
+{
+  "name": "figma-to-swiftui",
+  "description": "Turn an iOS Figma design into real SwiftUI, and keep the two in sync. Native toolbars, TabView, List and system colours instead of stacks and hexes that only look right.",
+  "version": "0.1.0",
+  "author": {
+    "name": "Ulad Luch"
+  },
+  "homepage": "https://github.com/uladluch/figma-to-swiftui",
+  "repository": "https://github.com/uladluch/figma-to-swiftui",
+  "license": "Apache-2.0"
+}

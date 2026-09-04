@@ -1,0 +1,15 @@
+{
+  "name": "figma-to-swiftui",
+  "owner": {
+    "name": "Ulad Luch",
+    "url": "https://github.com/uladluch"
+  },
+  "plugins": [
+    {
+      "name": "figma-to-swiftui",
+      "source": "./",
+      "description": "Turn an iOS Figma design into real SwiftUI, and keep the two in sync."
+    }
+  ],
+  "description": "Skills that teach a coding agent to turn an iOS Figma design into real SwiftUI and keep the two in sync, built around the free iOS 26 Builder kit."
+}
