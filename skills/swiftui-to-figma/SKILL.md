@@ -24,8 +24,10 @@ A colour edited in code belongs to the design system. Write it to the Figma **va
 every use follows. Writing it onto the one node you happened to find leaves the rest behind and
 quietly splits the system in two.
 
-Set the value for **one mode**. A colorset carries light and dark in a single file; a naive
-write clobbers the appearance you did not touch.
+Set the value for **one mode**, named explicitly. A colorset carries light and dark in a single
+file; a naive write clobbers the appearance you did not touch. And a collection is no longer
+two modes by default - a typography collection carrying Dynamic Type runs to ten, where an
+unnamed write silently lands on the default content size.
 
 Compare against a **baseline recorded when the code was generated**, not against a file event.
 Without a baseline, the first save reports every token as changed. Editors also write, rename

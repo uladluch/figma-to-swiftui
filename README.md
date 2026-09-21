@@ -26,9 +26,10 @@ These skills replace guessing with two things: an **audit** of what a frame actu
 and the rule that the agent **reads each component's own description and obeys it**.
 
 They get exact when the design carries its mapping. Every component in
-**[iOS 26 Builder](https://www.figma.com/community/file/922533165060687529)** — free, 118k
+**[iOS 27 Builder](https://www.figma.com/community/file/922533165060687529)** — free, 121k
 users, no plugin — names its SwiftUI or UIKit API in its own description, checked against the
-iOS 26 SDK on a live simulator. With those present the agent stops inferring and starts
+iOS 27 SDK on a live simulator. The iOS 26 edition stays published separately for apps still
+shipping against 26. With those present the agent stops inferring and starts
 translating.
 
 ---
@@ -40,7 +41,7 @@ translating.
 | **design-tokens** | both | which colours iOS owns and must never be copied as values |
 | **figma-to-swiftui** | design → code | chrome is modifiers, not children; what not to build at all |
 | **swiftui-to-figma** | code → design | the Plugin API writes that look successful and did nothing |
-| **layer-naming** | design → code | the fixed role vocabulary an agent can actually match on |
+| **figma-layer-roles** | design → code | the fixed role vocabulary an agent can actually match on |
 
 ---
 
@@ -50,7 +51,7 @@ Most tokens in an iOS design system are **not values**. They are names for colou
 supplies.
 
 In iOS 26 `systemBlue` moved to `#0088FF` while `link` stayed `#007AFF`, after years of being
-identical. Every app that had exported "its blue" into an asset catalog silently stopped
+identical. iOS 27 moved `opaqueSeparator` the same way. Every app that had exported "its blue" into an asset catalog silently stopped
 matching the system.
 
 So a token is sorted before it is converted:
@@ -62,9 +63,11 @@ So a token is sorted before it is converted:
 | **recipe** | one layer of a material — `.glassEffect()`, `Material` | no |
 | **own** | a colorset with light and dark | **yes** |
 
-In the iOS 26 Builder kit that split is **39 / 7 / 37 / 13**. Only thirteen colours out of
-ninety-six belong to the app. Exporting the other eighty-three as values is the bug this
-avoids.
+In the iOS 27 Builder kit that split is **50 / 7 / 17 / 15** across 89 colours — counted by
+running the rules below over the live file, not from memory. Only fifteen belong to the app;
+exporting the other seventy-four as values is the bug this avoids. (The recipe count halved
+when the kit moved to iOS 27 and its twenty Liquid Glass variables were folded into the
+primitives, which is why a number like this is worth re-counting rather than quoting.)
 
 Typography follows the same logic: `Font.largeTitle`, never `Font.system(size: 34)`. The number
 in Figma is what the system draws at the default text size — hard-coding it breaks Dynamic Type
@@ -76,7 +79,7 @@ for every reader who changed theirs.
 
 Every claim here was measured rather than remembered:
 
-- the generated Swift **compiles** — `swiftc -typecheck` against the iOS 26.5 SDK, zero errors
+- the generated Swift **compiles** — `swiftc -typecheck` against the iOS 27.0 SDK, zero errors
 - the asset catalog **compiles** — `actool`, zero errors, dark appearances present
 - an app built on the generated tokens **runs on the simulator**, and its background measures
   `#f2f2f7` in light and `#000000` in dark, because the system supplies the value

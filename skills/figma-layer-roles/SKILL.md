@@ -1,5 +1,5 @@
 ---
-name: layer-naming
+name: figma-layer-roles
 description: Name the layers inside a Figma component so an agent reading the file writes the right code. Use when building, renaming or restructuring layers in a Figma iOS design, when generated code comes back full of data-name="Frame 427", and as the last check before calling a component done.
 ---
 
@@ -15,7 +15,8 @@ carries the **role**. Never write `.toolbar` or `ToolbarItem(placement:)` as a l
 is not a call, and the moment the API changes the file lies. Name the role, using the word the SDK
 uses for that role.
 
-This pairs with `figma-to-swiftui`: that skill reads structure out of a frame, and this is what
+Named `figma-layer-roles` rather than `layer-naming` so it cannot collide with a project skill of
+that name — the iOS 27 Builder repository ships one. This pairs with `figma-to-swiftui`: that skill reads structure out of a frame, and this is what
 makes the structure readable.
 
 ## What must be named
@@ -77,7 +78,7 @@ Edge words follow the SDK: SwiftUI says `leading` and `trailing`, never left and
   not roles — a Tier A layer carrying one of those is unnamed by definition.
 - No trailing numbers unless the layer genuinely repeats among siblings.
 - A leading `_` marks a private atom — something assembled into other components rather than
-  placed directly on a screen. Useful convention, and iOS 26 Builder uses it throughout, so
+  placed directly on a screen. Useful convention, and iOS 27 Builder uses it throughout, so
   keep it if you are extending that file.
 
 ## Variant axes

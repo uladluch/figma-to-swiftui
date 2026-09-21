@@ -71,8 +71,10 @@ you to build it.
 ## Read the description, do not infer the API
 
 A kit that names its own API is the difference between a guess and a translation. Every
-component in [iOS 26 Builder](https://www.figma.com/community/file/922533165060687529) carries
-its mapping in its description, checked against the iOS 26 SDK on a live simulator.
+component in [iOS 27 Builder](https://www.figma.com/community/file/922533165060687529) carries
+its mapping in its description, checked against the iOS 27 SDK on a live simulator. Its colour and
+type variables also carry `codeSyntax.iOS`, so a token gives you `Color.blue` or `Font.body`
+directly rather than a name to interpret.
 
 ```
 Toolbar - Top      .toolbar { … } · .toolbarTitleDisplayMode(.inlineLarge)
@@ -97,7 +99,7 @@ Dynamic Type for everyone who changed theirs.
 
 Never emit a hex for a colour the system owns. `Color.primary`, not `#000000`. See the
 `design-tokens` skill for how to tell which is which - it matters more than it looks, because
-in iOS 26 `systemBlue` moved and `link` did not.
+in iOS 26 `systemBlue` moved while `link` did not, and iOS 27 moved `opaqueSeparator`.
 
 ## Finish honestly
 

@@ -40,8 +40,22 @@ catalog is a glass layer masquerading as a brand colour.
 
 ## Classifying without a table
 
-Do not keep a list of token names - it drifts the moment one is renamed. **Read the
-description.** A well-built kit states the mapping on the variable itself:
+Do not keep a list of token names - it drifts the moment one is renamed.
+
+**Read `codeSyntax` first.** A variable can carry the code name for each platform, and when it
+is there it IS the expression - no parsing, no guessing:
+
+```
+Accents/Blue        codeSyntax.iOS = "Color.blue"
+Separators/Opaque   codeSyntax.iOS = "Color(uiColor: .opaqueSeparator)"
+Body                codeSyntax.iOS = "Font.body"
+```
+
+A token deliberately left blank is a signal too: the kit fills `codeSyntax` only where a real
+SDK symbol exists, so an empty one means *there is no API for this* - classify it by description
+and expect `own` or `recipe`.
+
+**Then read the description.** A well-built kit states the mapping on the variable itself:
 
 ```
 Labels/Primary      "SwiftUI Color.primary · UIKit UIColor.label — text that contains primary content."
@@ -57,6 +71,10 @@ The rules, in order:
 4. description names **`SwiftUI Color.X`** or **`UIKit UIColor.Y`** → `sdk`, and that symbol is
    the expression to emit
 5. otherwise → `own`
+
+Counted over the iOS 27 Builder file: **sdk 50 · vibrancy 7 · recipe 17 · own 15** of 89 colours,
+with nothing falling through. Re-run the rules rather than trusting that split - the recipe count
+was 37 one release earlier.
 
 Rule 3 is easy to miss and expensive: a kit keeps its material recipes in a private collection
 precisely because they are not palette. Without it, 37 glass layers arrive as app colours.
@@ -79,6 +97,11 @@ happens to draw at the default text size; it is not the value.
 
 Spacing is the opposite: SwiftUI ships no spacing scale, so a spacing scale belongs to the
 project and round-trips like any `own` token.
+
+**A typography collection may carry Dynamic Type as modes.** The iOS 27 Builder file holds ten -
+`Large (Default)`, the six other content sizes, and AX1 ⁄ AX3 ⁄ AX5 - so `Body` resolves to 17 at
+the default and 40 at AX3. Emit the `Font` case and none of those numbers. When writing back, name
+the mode explicitly; a write with no mode lands on whichever one the collection defaults to.
 
 ## What to generate
 
@@ -121,5 +144,6 @@ Compare against a baseline recorded when the code was generated, never against t
 itself. Without a baseline the first save reports every token as changed; with one, a save that
 changes nothing reports nothing.
 
-Set the value for **one mode**. A colorset carries light and dark in a single file, and a naive
-write clobbers the appearance you did not touch.
+Set the value for **one mode**, and say which. A colorset carries light and dark in a single
+file, and a naive write clobbers the appearance you did not touch. Collections now run to ten
+modes, so "one mode" is no longer the same as "the only other one".
